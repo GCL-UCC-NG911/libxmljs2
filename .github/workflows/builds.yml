@@ -29,11 +29,11 @@ jobs:
           npm_config_build_from_source: true
       - run: pnpm tsd
       - run: pnpm test
-      - run: pnpm prebuild
+      - run: pnpm package
       - uses: actions/upload-artifact@v4
         with:
           name: ${{ matrix.os }}-${{ matrix.node }}-binary
-          path: 'prebuilds/**/*.tar.gz'
+          path: 'build/**/*.tar.gz'
   alpine:
     runs-on: ubuntu-20.04
     strategy:
@@ -51,12 +51,13 @@ jobs:
         env:
           npm_config_build_from_source: true
       - run: pnpm tsd
+      - run: pnpm build
       - run: pnpm test
-      - run: pnpm prebuild
+      - run: pnpm package
       - uses: actions/upload-artifact@v4
         with:
           name: alpine-${{ matrix.node }}-binary
-          path: 'prebuilds/**/*.tar.gz'
+          path: 'build/**/*.tar.gz'
   deploy:
     runs-on: ubuntu-20.04
     needs: [alpine, build]
@@ -76,4 +77,4 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
           tag: ${{ steps.vars.outputs.tag }}
           files: |
-            ./prebuilds/**/*.tar.gz
+            ./build/*/stage/marudor/libxmljs2/releases/download/*/*

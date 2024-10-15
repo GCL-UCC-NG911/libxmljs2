@@ -9,8 +9,8 @@ dependencies:
     specifier: ~1.5.0
     version: 1.5.0
   nan:
-    specifier: ~2.20.0
-    version: 2.20.0
+    specifier: ~2.22.0
+    version: 2.22.0
   node-gyp:
     specifier: ^10.2.0
     version: 10.2.0
